@@ -34,10 +34,10 @@ class _QuizState extends State<Quiz> {
     }
   }
 
-  restartQuiz() {
+  void restartQuiz() {
     setState(() {
       selectedAnswers = [];
-      activeScreen = 'start-screen';
+      activeScreen = 'questions-screen';
     });
   }
 
@@ -54,6 +54,7 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == 'results-screen') {
       screenWidget = ResultsScreen(
         chosenAnswers: selectedAnswers,
+        onRestart: restartQuiz,
       );
     }
 
