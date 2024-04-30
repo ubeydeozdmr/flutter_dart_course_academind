@@ -40,7 +40,7 @@ class _NewExpenseState extends State<NewExpense> {
                 child: const Text('Save Expense'),
               )
             ],
-          )
+          ),
         ],
       ),
     );
