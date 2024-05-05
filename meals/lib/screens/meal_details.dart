@@ -16,79 +16,56 @@ class MealDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(meal.title),
       ),
-      body: Column(
-        children: [
-          Image.network(
-            meal.imageUrl,
-            width: double.infinity,
-            height: 300,
-            fit: BoxFit.cover,
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Ingredients',
-            // style: Theme.of(context).textTheme.onBackground,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onBackground,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.network(
+              meal.imageUrl,
+              height: 300,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            height: 200,
-            width: 300,
-            child: ListView.builder(
-              itemCount: meal.ingredients.length,
-              itemBuilder: (ctx, index) => Card(
-                color: Theme.of(context).colorScheme.primary,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                    horizontal: 8,
+            const SizedBox(height: 14),
+            Text(
+              'Ingredients',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: Text(meal.ingredients[index]),
+            ),
+            const SizedBox(height: 14),
+            for (final ingredient in meal.ingredients)
+              Text(
+                ingredient,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
+              ),
+            const SizedBox(height: 14),
+            Text(
+              'Steps',
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            const SizedBox(height: 14),
+            for (final step in meal.steps)
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                child: Text(
+                  step,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Steps',
-            // style: Theme.of(context).textTheme.headlineLarge,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onBackground,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            height: 200,
-            width: 300,
-            child: ListView.builder(
-              itemCount: meal.steps.length,
-              itemBuilder: (ctx, index) => Card(
-                color: Theme.of(context).colorScheme.primary,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 4,
-                    horizontal: 8,
-                  ),
-                  child: Text(meal.steps[index]),
-                ),
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
