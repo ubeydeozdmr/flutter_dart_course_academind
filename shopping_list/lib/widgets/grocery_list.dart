@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:shopping_list/data/dummy_items.dart';
 
 class GroceryList extends StatelessWidget {
@@ -7,25 +8,23 @@ class GroceryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Your Groceries'),
+      appBar: AppBar(
+        title: const Text('Your Groceries'),
+      ),
+      body: ListView.builder(
+        itemCount: groceryItems.length,
+        itemBuilder: (ctx, index) => ListTile(
+          title: Text(groceryItems[index].name),
+          leading: Container(
+            width: 24,
+            height: 24,
+            color: groceryItems[index].category.color,
+          ),
+          trailing: Text(
+            groceryItems[index].quantity.toString(),
+          ),
         ),
-        body: ListView(
-          children: groceryItems.map((item) {
-            return ListTile(
-              title: Text(item.name),
-              trailing: Text('${item.quantity}'),
-              leading: CircleAvatar(
-                child: Container(
-                  color: item.category.color,
-                  // decoration: BoxDecoration(
-                  //   shape: BoxShape.rectangle,
-                  //   color: item.category.color,
-                  // ),
-                ),
-              ),
-            );
-          }).toList(),
-        ));
+      ),
+    );
   }
 }
