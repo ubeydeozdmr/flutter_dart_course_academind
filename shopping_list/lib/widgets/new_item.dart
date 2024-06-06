@@ -29,7 +29,13 @@ class _NewItemState extends State<NewItem> {
                   label: Text('Name'),
                 ),
                 validator: (value) {
-                  return 'Demo...';
+                  if (value == null ||
+                      value.isEmpty ||
+                      int.tryParse(value) == null ||
+                      int.tryParse(value)! <= 0) {
+                    return 'Must be a valid, positive number.';
+                  }
+                  return null;
                 },
               ), // instead of TextField()
               Row(
