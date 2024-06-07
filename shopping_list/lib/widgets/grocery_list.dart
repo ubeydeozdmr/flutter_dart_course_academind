@@ -29,6 +29,39 @@ class _GroceryListState extends State<GroceryList> {
     });
   }
 
+  Widget _emptyList() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('No groceries yet.'),
+          const SizedBox(height: 12),
+          ElevatedButton(
+            onPressed: _addItem,
+            child: const Text('Add one'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _groceryList() {
+    return ListView.builder(
+      itemCount: _groceryItems.length,
+      itemBuilder: (ctx, index) => ListTile(
+        title: Text(_groceryItems[index].name),
+        leading: Container(
+          width: 24,
+          height: 24,
+          color: _groceryItems[index].category.color,
+        ),
+        trailing: Text(
+          _groceryItems[index].quantity.toString(),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,20 +74,7 @@ class _GroceryListState extends State<GroceryList> {
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: _groceryItems.length,
-        itemBuilder: (ctx, index) => ListTile(
-          title: Text(_groceryItems[index].name),
-          leading: Container(
-            width: 24,
-            height: 24,
-            color: _groceryItems[index].category.color,
-          ),
-          trailing: Text(
-            _groceryItems[index].quantity.toString(),
-          ),
-        ),
-      ),
+      body: _groceryItems.isEmpty ? _emptyList() : _groceryList(),
     );
   }
 }
